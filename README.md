@@ -24,7 +24,7 @@ The resized image from above center image is shown below:
 
 | Resized Center image    | 
 | ----------------------- |
-|![Left] (https://github.com/buaalsy2003/CarND-BehavioralCloning/blob/master/Resized_Center.png) |
+|![Resized-Center] (https://github.com/buaalsy2003/CarND-BehavioralCloning/blob/master/Resized-Center.png) |
 
 ddd
 
