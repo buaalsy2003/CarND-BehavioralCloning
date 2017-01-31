@@ -11,6 +11,6 @@ This project is to perform Behavioral Cloning of human driving behavior. Images 
 
 Results
 
-| Simulated  Driving  |
-| ------------------- |
-|![Simulated] (https://github.com/buaalsy2003/CarND-BehavioralCloning/blob/master/Animation1.gif) | 
+| Self-Driving Part1  | Self-Driving Part 2 |
+| ------------------- | ------------------- |
+|![Simulated] (https://github.com/buaalsy2003/CarND-BehavioralCloning/blob/master/Animation1.gif) | ![Center] (https://github.com/buaalsy2003/CarND-BehavioralCloning/blob/master/Animation2.gif) |
