@@ -13,7 +13,7 @@ Udacity Simulator provides a Training mode for users to create training images. 
 ### Data Collecting
 It can be noticed that images in each set are very similar except for a minor angle change. Therefore, I am mainly using the center image. It is well known that deep neural network needs a large amount of input features/data/images for training, testing and validation. I use two ways to increase my input dataset.
   1. I mirror the center images of non-zero steering angles and added them to the input data. 
-  2. Also from the non-zero steering angle image sets, I use the left and right images by applying 0.05 and -0.05 steering angle respectively. 
+  2. Also from the non-zero steering angle image sets, I use the left and right images by applying 0.03 and -0.03 steering angle respectively. 
 With the two methods, the number of input images is increased to about 20000. This is enough for network training purpose. 
 
 ### Data Processing
@@ -26,7 +26,7 @@ The resized image from above center image is shown below:
 | ----------------------- |
 |![Resized-Center] (https://github.com/buaalsy2003/CarND-BehavioralCloning/blob/master/Resized-Center.png) |
 
-ddd
+Then I normalize the image color of 0 to 255 to (-0.5 to 0.5). From the original center image, I randomly pick 10% as test set and 10% from the rest as validation set. I could have used more for test and validation but I did so because I already am short of training dataset. 
 
 ## Network Structure
 
