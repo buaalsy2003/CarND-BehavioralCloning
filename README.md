@@ -5,6 +5,7 @@ This project is to perform Behavioral Cloning of human driving behavior. 3 camer
 
 ## Data Processing
 Udacity Simulator provides a Training mode for users to create training images. Due to my hardware limitation, I am using the training images provided by Udacity for this project. There are total 8036 sets of images from center, left and right cameras, as well as driving parameters corresponding to each image set. Below is a sample image set:
+
 | Left image    | Center image  | Right image  |
 | ------------- |:-------------:| ------------ |
 |![Left] (https://github.com/buaalsy2003/CarND-BehavioralCloning/blob/master/left.jpg) | ![Center] (https://github.com/buaalsy2003/CarND-BehavioralCloning/blob/master/center.jpg) | ![Right] (https://github.com/buaalsy2003/CarND-BehavioralCloning/blob/master/right.jpg)
