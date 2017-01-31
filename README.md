@@ -67,8 +67,9 @@ And Below is the network Output Shape:
     activation_3 (Activation)        (None, 10)            0           dense_3[0][0]
     dense_4 (Dense)                  (None, 1)             11          activation_3[0][0]
 
+I used Adam optimizer with a learning rate = 0.0001 and Mean Squared Error as loss metric. I tried to use larger learning rate like 0.1 and the result was not good at all due to bad converge. So I lowered the learning rate to 0.0001, which gives me a reliable model. Further decreasing the learning rate will not improve the result. I trained the model on an octa-core CPU and It took 10 minutes to finish 20 epochs of training. The training loss and validation loss kept decreasing during the 20 epochs but failed to reliably decreasing beyond that. But I am not sure why my training accuracy and valication accuracy were not changing at all. This made me think the 0.54 testing accuracy wont give me any clue on how the real accuracy is. Asked the question on forum and several people suggested not to care much about the accuracy but only focus on the loss as a way to validate the model. 
 
-## Results and Discussion
+## Simulation Results and Discussion
 
 Results
 
