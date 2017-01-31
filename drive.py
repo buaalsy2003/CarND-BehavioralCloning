@@ -14,6 +14,7 @@ from io import BytesIO
 
 from keras.models import model_from_json
 from keras.preprocessing.image import ImageDataGenerator, array_to_img, img_to_array
+from scipy.misc import imresize
 
 # Fix error with Keras and TensorFlow
 import tensorflow as tf
@@ -44,6 +45,20 @@ def telemetry(sid, data):
     steering_angle = float(model.predict(transformed_image_array, batch_size=1))
     # The driving model currently just outputs a constant throttle. Feel free to edit this.
     throttle = 0.2
+    '''
+    if(abs(steering_angle) < 0.05):
+        throttle = 0.25
+    elif(abs(steering_angle) < 0.1):
+        throttle = 0.1
+    elif(abs(steering_angle) < 0.2):
+        throttle = 0.05
+    elif(abs(steering_angle) < 0.3):
+	    throttle = 0.01
+    elif(abs(steering_angle) < 0.4):
+	    throttle = 0.05
+    else:
+        throttle = 0.001
+    '''
     print(steering_angle, throttle)
     send_control(steering_angle, throttle)
 
