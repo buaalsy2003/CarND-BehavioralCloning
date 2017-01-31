@@ -29,6 +29,59 @@ The resized image from above center image is shown below:
 Then I normalize the image color of 0 to 255 to (-0.5 to 0.5). From the original center image, I randomly pick 10% as test set and 10% from the rest as validation set. I could have used more for test and validation but I did so because I already am short of training dataset. 
 
 ## Network Structure
+This project involves image classfication/regression on camera images. For such problems, Convolutional Neural Network is a good choice of machine learning algorithms. To build a CNN, tt is often a good practice to start from an existing network with similar problems. The NVidia's paper [End to End Learning for Self-driving Cars] (http://images.nvidia.com/content/tegra/automotive/images/2016/solutions/pdf/end-to-end-dl-using-px.pdf) solved a very similar problem as this project. My network structure is similar to that with some minor changes. I used only 4 convolutional layers instead of 5 in NVidia's paper. The reason is that I don't have as much data to train and more complex network may cause overfitting with less input data. I use 3 fully connected layers and also two Dropout to prevent overfitting.  
+Below is my Network structure:
+
+********************************************************************************************************************************
+Conv2D(24, 3, 3, border_mode='valid', subsample=(2,2), activation='relu', input_shape=(smallSizeX,smallSizeY,3))
+Conv2D(36, 3, 3, border_mode='valid', subsample=(1,2), activation='relu')
+Conv2D(48, 3, 3, border_mode='valid', activation='relu')
+Conv2D(64, 2, 2, border_mode='valid', activation='relu')
+Flatten()
+Dense(512)
+Dropout(.5)
+Activation('relu')
+Dense(64)
+Dropout(.2)
+Activation('relu')
+Dense(10)
+Activation('relu')
+Dense(1)
+********************************************************************************************************************************
+
+And Below is the network Output Shape
+
+Layer (type)                     Output Shape          Param #     Connected to
+====================================================================================================
+convolution2d_1 (Convolution2D)  (None, 9, 37, 24)     672         convolution2d_input_1[0][0]
+____________________________________________________________________________________________________
+convolution2d_2 (Convolution2D)  (None, 7, 18, 36)     7812        convolution2d_1[0][0]
+____________________________________________________________________________________________________
+convolution2d_3 (Convolution2D)  (None, 5, 16, 48)     15600       convolution2d_2[0][0]
+____________________________________________________________________________________________________
+convolution2d_4 (Convolution2D)  (None, 4, 15, 64)     12352       convolution2d_3[0][0]
+____________________________________________________________________________________________________
+flatten_1 (Flatten)              (None, 3840)          0           convolution2d_4[0][0]
+____________________________________________________________________________________________________
+dense_1 (Dense)                  (None, 512)           1966592     flatten_1[0][0]
+____________________________________________________________________________________________________
+dropout_1 (Dropout)              (None, 512)           0           dense_1[0][0]
+____________________________________________________________________________________________________
+activation_1 (Activation)        (None, 512)           0           dropout_1[0][0]
+___________________________________________________________________________________________________
+dense_2 (Dense)                  (None, 64)            32832       activation_1[0][0]
+____________________________________________________________________________________________________
+dropout_2 (Dropout)              (None, 64)            0           dense_2[0][0]
+____________________________________________________________________________________________________
+activation_2 (Activation)        (None, 64)            0           dropout_2[0][0]
+____________________________________________________________________________________________________
+dense_3 (Dense)                  (None, 10)            650         activation_2[0][0]
+____________________________________________________________________________________________________
+activation_3 (Activation)        (None, 10)            0           dense_3[0][0]
+____________________________________________________________________________________________________
+dense_4 (Dense)                  (None, 1)             11          activation_3[0][0]
+
+
 
 ## Results and Discussion
 
