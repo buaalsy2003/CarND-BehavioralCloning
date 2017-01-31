@@ -11,6 +11,6 @@ This project is to perform Behavioral Cloning of human driving behavior. Images 
 
 Results
 
-| Controlled  Driving  |
-| -------------------- |
-|![Controlled] (https://github.com/JustinHeaton/Behavioral-Cloning/blob/master/Images/Controlled.gif) | 
+| Simulated  Driving  |
+| ------------------- |
+|![Simulated] (https://github.com/buaalsy2003/CarND-BehavioralCloning/blob/master/Animation1.gif) | 
