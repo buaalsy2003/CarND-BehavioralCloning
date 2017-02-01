@@ -67,12 +67,16 @@ And Below is the network Output Shape:
     activation_3 (Activation)        (None, 10)            0           dense_3[0][0]
     dense_4 (Dense)                  (None, 1)             11          activation_3[0][0]
 
-I used Adam optimizer with a learning rate = 0.0001 and Mean Squared Error as loss metric. I tried to use larger learning rate like 0.1 and the result was not good at all due to bad converge. So I lowered the learning rate to 0.0001, which gives me a reliable model. Further decreasing the learning rate will not improve the result. I trained the model on an octa-core CPU and It took 10 minutes to finish 20 epochs of training. The training loss and validation loss kept decreasing during the 20 epochs but failed to reliably decreasing beyond that. But I am not sure why my training accuracy and valication accuracy were not changing at all. This made me think the 0.54 testing accuracy wont give me any clue on how the real accuracy is. Asked the question on forum and several people suggested not to care much about the accuracy but only focus on the loss as a way to validate the model. 
+I used Adam optimizer with a learning rate = 0.0001 and Mean Squared Error as loss metric. I tried to use larger learning rate like 0.1 and the result was not good at all due to bad converge. So I lowered the learning rate to 0.0001, which gives me a reliable model. Further decreasing the learning rate will not improve the result. I trained the model on an octa-core CPU and It took 10 minutes to finish 20 epochs of training. The training loss kept decreasing even beyond 30 epochs but validation loss was almost decreasing during the 20 epochs but bouncing around beyond that. The final test loss is 0.00988.
+However, I am not sure why my training accuracy and valication accuracy were not changing at all. This made me think the 0.54 testing accuracy wont give me any clue on how the real accuracy is. Asked the question on forum and several people suggested not to care much about the accuracy but only focus on the loss as a way to validate the model. 
 
 ## Simulation Results and Discussion
 
-Results
+When the trained network is ready, it is time to test it on the simulator. 
+First of all, I use the model to predict steering angles by feeding in images at real time. With the steering angles, the car can be driven autonomously. By default, we could give a constant throttle. But the simulation result using constant throttle is not good. Car would hit curb often especially at sharp turns. This mimics the real world behavior. Drivers tend to slow down at sharp turns to avoid going off the road. So in drive.py, I use a piece-wise constant throttle depending on the steering angles. The larger steering angle, the smaller throttle.
+With the piecewise constant throttle function, the overall result is satisfactory in Track 1 on the simulator. The car stayed in lane for more than 20 laps. The car  wiggled and went off the lane center once a while but it found its way back to lane center shortly. Such recovery is largely achieved by leveraging the left and right camera images. 
 
 | Self-Driving Part1  | Self-Driving Part 2 |
 | ------------------- | ------------------- |
 |![Simulated] (https://github.com/buaalsy2003/CarND-BehavioralCloning/blob/master/Animation1.gif) | ![Center] (https://github.com/buaalsy2003/CarND-BehavioralCloning/blob/master/Animation2.gif) |
+
