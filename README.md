@@ -47,7 +47,6 @@ Below is my Network structure:
     Activation('relu')
     Dense(1)
 
-
 And Below is the network Output Shape:
 
     Layer (type)                     Output Shape          Param       Connected to
@@ -67,7 +66,24 @@ And Below is the network Output Shape:
     activation_3 (Activation)        (None, 10)            0           dense_3[0][0]
     dense_4 (Dense)                  (None, 1)             11          activation_3[0][0]
 
-I used Adam optimizer with a learning rate = 0.0001 and Mean Squared Error as loss metric. I tried to use larger learning rate like 0.1 and the result was not good at all due to bad converge. So I lowered the learning rate to 0.0001, which gives me a reliable model. Further decreasing the learning rate will not improve the result. I trained the model on an octa-core CPU and It took 10 minutes to finish 20 epochs of training. The training loss kept decreasing even beyond 30 epochs but validation loss was almost decreasing during the 20 epochs but bouncing around beyond that. The final test loss is 0.00988.
+## Network characteristics
+From above table, the Network structure is clearly shown. 
+* Layers
+  I used only 4 layers in stead of 5 layers in NVidia paper. The reason behind is I don't have as much training data. The more complex Network tends to cause overfitting without enough training data. I tried a 5-layer network and the result is not as good. 
+* Dropout Layers
+  It is very important to include Dropout layers to prevent overfitting. The idea is to set to zero the output of each hidden neuron with given probability. This technique provents some neurons rely on the presence of particular other neurons, which forcs the network to learn more robust features. In this project I used probability 0.5, which gives a reasonable approximation to taking the geometric information.
+* Activation
+  I used 'relu' as my activation function. It would allow the non-linearity into your network apparently, which is a way to prevent overfitting. On the other hand, it can accelarate the convergence of stochastic gradient descent comparing to the sigmoid functions.
+
+## How the model was trained
+The model was trained on an octa-core CPU. The actually training process is a hyper parameter fine tune process. I had to try to find a good combination of parameters to produce a relaiable and robust model to get good simulation results. Below is how I adjusted my model parameters:
+* Optimizer and Learning rate: 
+  I used Adam optimizer with a learning rate = 0.0001 and Mean Squared Error as loss metric. I tried to use large learning rate like 0.1 and the result was not good at all due to bad converge. So I lowered the learning rate to 0.0001, which gives me a reliable model. Further decreasing the learning rate will not improve the result. My experiments showed that the lower learning rate led to increased accuracy both in terms of mse and autonomous driving. But I didn't let learning rate go below 0.0001 since it required more training epochs to converge the model and 0.0001 is good enough for the project. (I tried SGD as well but the result is not as good.)
+* Epochs:
+  It took 10 minutes to finish 20 epochs of training with the final test loss 0.00988. I chose the number of epochs based on the validation loss change. By observation, the training loss kept decreasing even beyond 30 epochs but validation loss was almost decreasing during the first 20 epochs but bouncing around after that, which is a sign of overfitting due to noise in the training data. On the other hand, the trained model after 20 epochs is good enough to allow self-driving in the test track. 
+* Batch size:
+  I used 128 as my batch size. I started with 64 and result is OK but the vehicle was off the road once a while. The reason might be less training data will cause some noise gradients. The smaller the batch the less accurate estimate of the gradient. When I increased it to 128, the result is satisfactory. I could bump the batch size up to 256 but it would take more memory and time to train the model, which is not necessary in this project. 
+  
 However, I am not sure why my training accuracy and valication accuracy were not changing at all. This made me think the 0.54 testing accuracy wont give me any clue on how the real accuracy is. Asked the question on forum and several people suggested not to care much about the accuracy but only focus on the loss as a way to validate the model. 
 
 ## Simulation Results and Discussion
