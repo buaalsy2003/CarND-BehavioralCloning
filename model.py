@@ -134,7 +134,7 @@ model.compile(loss='mean_squared_error',
 
 ### Model training
 history = model.fit(X_train, y_train,
-                    batch_size=128, nb_epoch=10,
+                    batch_size=128, nb_epoch=20,
                     verbose=1, shuffle=True, validation_data=(X_valid, y_valid))
 score = model.evaluate(X_test, y_test, verbose=1)
 print('Test score:', score[0])
